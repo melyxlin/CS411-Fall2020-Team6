@@ -1,36 +1,40 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Input, Select } from "../src/Component";
-import Iframe from 'react-iframe'
-
 
 function App() {
   const [gifVisable, setGifResponseVisable] = useState(false);
-  const [gif, setGif] = useState(""); 
-  const onSubmit = data => {
-    const baseURL = "https://cors-anywhere.herokuapp.com/http://api.giphy.com/v1/gifs/search?q="+data.message+"&api_key=go8FOfcD0xY7if8tcWD8Yu9MnO40ylFW&limit=1";
+  const [gif, setGif] = useState("");
+  const [message, setMessage] = useState("");
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const baseURL =
+      "http://api.giphy.com/v1/gifs/translate?s=" +
+      message.replace(/\s/g, "+") +
+      "&api_key=go8FOfcD0xY7if8tcWD8Yu9MnO40ylFW&limit=1";
 
-    axios({url: baseURL})
-    .then(function (response) {
-      console.log(response.data)
-      setGif("https://cors-anywhere.herokuapp.com/"+response.data.data[0]["url"]);
-    })
+    axios({ url: baseURL }).then(function (response) {
+      setGif(response.data.data.images.downsized.url);
+    });
     setGifResponseVisable(true);
-
-};
+  };
 
   return (
-<div>
+    <div>
       <h1>Translator</h1>
-      <Form onSubmit={onSubmit}>
-        <Input name="message" />
 
-        <Input type="submit" value="Submit" />
-      </Form>
-
-      {gifVisable && (<img src = {gif} alt="gif" />)}
-      </div>
-
+      <form onSubmit={handleSubmit}>
+        <label>
+          Message:
+          <input type="text" onChange={(e) => setMessage(e.target.value)} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+      {gifVisable && (
+        <div>
+          <img src={gif} alt="gif" />
+        </div>
+      )}
+    </div>
   );
 }
 
