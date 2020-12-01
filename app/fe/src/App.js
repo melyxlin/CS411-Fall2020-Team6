@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import MaterialUI from "./components/layout/Material";
 import { Grid } from "@material-ui/core";
-import { TranslateForm, TranslateDisplay } from "./components";
+import { TranslateForm, TranslateDisplay, Head } from "./components";
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import { blue } from "@material-ui/core/colors";
 
 function App() {
   const [response, setResponse] = useState("");
@@ -12,8 +15,24 @@ function App() {
     setResponseVisable(true);
   };
 
+  const theme = responsiveFontSizes(
+    createMuiTheme({
+      palette: {
+        type: "dark",
+        primary: blue,
+        secondary: {
+          main: "#ce93d8",
+        },
+      },
+    })
+  );
+
+  
+
   return (
+    <ThemeProvider theme={theme}>
     <Grid container>
+      <Head />
       <Grid item xs>
         <MaterialUI paperClass="paper-top">
           <TranslateForm
@@ -34,6 +53,7 @@ function App() {
         </Grid>
       </Grid>
     </Grid>
+    </ThemeProvider>
   );
 }
 
