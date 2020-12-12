@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { blue } from "@material-ui/core/colors";
 
-function App() {
+export default function App() {
   const [response, setResponse] = useState("");
   const [responseVisable, setResponseVisable] = useState(false);
 
@@ -54,5 +54,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

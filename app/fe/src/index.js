@@ -2,18 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./index.css";
-import App from "./pages/App";
-import Login from "./pages/Login";
-import History from "./pages/History";
+import {App, History, Login, Restricted, NoPage} from "./pages"
 
 const routing = (
   <Router>
     <div>
       <Switch>
-        <Route path="/" component={App} exact />
-        <Route path="/Login" component={Login} />
-        <Route path="/History" component={History} />
-        <Route component={Error} />
+       { localStorage.getItem('loggedin') === null || localStorage.getItem('loggedin') === 'false' ? (<Route path="/" component={Login} exact />) : (<Route path="/" component={App} exact />)} 
+        { localStorage.getItem('loggedin') === null || localStorage.getItem('loggedin') === 'false' ? ( <Route path="/History" component={Restricted} />) : ( <Route path="/History" component={History} />)} 
+        <Route component={NoPage} />
       </Switch>
     </div>
   </Router>
