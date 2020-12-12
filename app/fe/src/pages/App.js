@@ -27,32 +27,30 @@ function App() {
     })
   );
 
-  
-
   return (
     <ThemeProvider theme={theme}>
       <Head auth={true} />
-    <Grid container>
-      <Grid item xs>
-        <MaterialUI paperClass="paper-top">
-          <TranslateForm
-            parentCallback={(childData) => callBackResponse(childData)}
-          />
-        </MaterialUI>
-      </Grid>
-      <Grid item xs>
-        <Grid container direction="column">
-          <Grid item xs>
-            <MaterialUI paperClass="paper-top">
-              <TranslateDisplay
-                response={response}
-                responseVisable={responseVisable}
-              />
-            </MaterialUI>
+      <Grid container>
+        <Grid item xs>
+          <MaterialUI paperClass="paper-top">
+            <TranslateForm
+              parentCallback={(childData) => callBackResponse(childData)}
+            />
+          </MaterialUI>
+        </Grid>
+        <Grid item xs>
+          <Grid container direction="column">
+            <Grid item xs>
+              <MaterialUI paperClass="paper-top">
+                <TranslateDisplay
+                  response={response}
+                  responseVisable={responseVisable}
+                />
+              </MaterialUI>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
     </ThemeProvider>
   );
 }

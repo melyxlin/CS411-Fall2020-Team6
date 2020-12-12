@@ -1,11 +1,9 @@
 import React from "react";
-import { render, fireEvent,
-  waitFor, } from "@testing-library/react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 import App from "../App";
 import { act } from "react-dom/test-utils";
 
 describe("Main Component", () => {
-
   it("renders the page", () => {
     const wrapper = render(<App />);
     expect(wrapper).toBeDefined();
@@ -27,7 +25,7 @@ describe("Main Component", () => {
 
   it("displays an error when form is submitted without a language", async () => {
     // Finding submit button of Token Validation form.
-    const { getByText,  getByTestId, container } = render(<App />);
+    const { getByText, getByTestId, container } = render(<App />);
     const button = await waitFor(() => container.querySelector("Form"));
     const messageInput = await waitFor(() => getByTestId("message-field"));
 
@@ -49,7 +47,7 @@ describe("Main Component", () => {
 
   it("displays an error when form is submitted without a message", async () => {
     // Finding submit button of Token Validation form.
-    const { getByText,  getByTestId, container } = render(<App />);
+    const { getByText, getByTestId, container } = render(<App />);
     const button = await waitFor(() => container.querySelector("Form"));
     const languageInput = await waitFor(() => getByTestId("language-field"));
 
@@ -71,7 +69,7 @@ describe("Main Component", () => {
 
   it("displays the right number of characters when message is typed", async () => {
     // Finding submit button of Token Validation form.
-    const { getByText,  getByTestId, container } = render(<App />);
+    const { getByText, getByTestId, container } = render(<App />);
     const button = await waitFor(() => container.querySelector("Form"));
     const messageInput = await waitFor(() => getByTestId("message-field"));
 
@@ -93,7 +91,7 @@ describe("Main Component", () => {
 
   it("stops writing when the max number of characters is typed", async () => {
     // Finding submit button of Token Validation form.
-    const { getByText,  getByTestId, container } = render(<App />);
+    const { getByText, getByTestId, container } = render(<App />);
     const button = await waitFor(() => container.querySelector("Form"));
     const messageInput = await waitFor(() => getByTestId("message-field"));
 
@@ -112,6 +110,4 @@ describe("Main Component", () => {
 
     expect(getByText("280/280")).not.toBeNull();
   });
-
-
 });
