@@ -100,14 +100,16 @@ export default function TranslateForm(props) {
                     rows={10}
                     inputProps={{
                       maxLength: 280,
-                      "data-testid": "message-field"
+                      "data-testid": "message-field",
                     }}
                     onChange={handleChange}
                     error={errors.message && touched.message}
                     helperText={
                       errors.message && touched.message
-                        ? "Message Required." :
-                        values.message.length <= MAX_CHARACTER ? `${values.message.length}/${MAX_CHARACTER}` : `${MAX_CHARACTER}/${MAX_CHARACTER}`
+                        ? "Message Required."
+                        : values.message.length <= MAX_CHARACTER
+                        ? `${values.message.length}/${MAX_CHARACTER}`
+                        : `${MAX_CHARACTER}/${MAX_CHARACTER}`
                     }
                   />
                 </Box>

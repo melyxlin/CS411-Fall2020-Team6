@@ -39,7 +39,7 @@ export default function TranslateDisplay(props) {
           rows={10}
           InputProps={{
             readOnly: true,
-            "data-testid": "display-field"
+            "data-testid": "display-field",
           }}
           style={{ marginBottom: "1rem" }}
         />
@@ -47,9 +47,9 @@ export default function TranslateDisplay(props) {
       {responseVisable && (
         <Grid container direction="row" justify="flex-end" alignItems="center">
           <Button
-          inputProps={{
-            "data-testid": "translate-button"
-          }}
+            inputProps={{
+              "data-testid": "translate-button",
+            }}
             className="button-info"
             variant="contained"
             color="primary"

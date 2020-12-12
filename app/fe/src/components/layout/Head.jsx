@@ -1,15 +1,11 @@
-
-
-import React from 'react';
-import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import React from "react";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Button from '@material-ui/core/Button'
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +21,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Head(props) {
   const classes = useStyles();
-  const auth =  props.auth;
+  const auth = props.auth;
+
+  const logout = () => {
+    localStorage.setItem("loggedin", "false");
+    window.location.href = "http://localhost:3000";
+  };
 
   return (
     <div className={classes.root}>
@@ -34,20 +35,17 @@ export default function Head(props) {
           <Typography variant="h6" className={classes.title}>
             TransTweeter
           </Typography>
-          {auth &&
-        (  <div>
-          <Button component={Link} to="/">Main</Button>
-        <Button
-        component={Link} to="/History"
-        >
-          History
-        </Button>
-        <IconButton
-        >
-          <ExitToAppIcon />
-        </IconButton>
-        </div>)
-}
+          {auth && (
+            <div>
+              <Button component={Link} to="/">
+                Main
+              </Button>
+              <Button component={Link} to="/History">
+                History
+              </Button>
+              <Button onClick={() => logout()}>Log Out</Button>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </div>
@@ -55,5 +53,5 @@ export default function Head(props) {
 }
 
 Head.propTypes = {
-  auth: PropTypes.bool
-}
+  auth: PropTypes.bool,
+};
