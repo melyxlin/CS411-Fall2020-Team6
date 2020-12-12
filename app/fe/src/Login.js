@@ -35,14 +35,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-    <Grid container>
+    <Grid container justify="center" alignItems="center">
       <Head />
-      <Grid item xs>
-        <MaterialUI paperClass="paper-top">
-        <Typography variant="h1" component="h2" gutterBottom style={{
-       marginLeft: '20%'
-    }}>
-Welcome to Transtweeter!
+      <Grid item xs={6} >
+        <MaterialUI paperClass="paper-login">
+        <Typography variant="h4" component="h2" gutterBottom>
+Login
       </Typography>
         <TwitterLogin loginUrl="http://localhost:4000/api/v1/auth/twitter" //need to change
                       onFailure={onFailed}

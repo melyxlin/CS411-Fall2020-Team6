@@ -1,16 +1,22 @@
 .root {
-  width: auto;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  background-color: #303030;
-  color: #ffffff;
+    width: auto;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    background-color: #303030;
+    color: #ffffff;
 }
 
 .paper-top {
-  margin-top: 8rem;
-  padding: 2rem;
+    margin-top: 8rem;
+    padding: 2rem;
+}
+
+.paper-login {
+    margin-top: 8rem;
+    padding: 2rem;
+    text-align: center;
 }
 
 .header {
-  padding: 0.5rem;
+    padding: 0.5rem;
 }
