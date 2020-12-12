@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./index.css";
-import App from "./App";
-import Login from "./Login"
-import History from "./History"
+import App from "./pages/App";
+import Login from "./pages/Login"
+import History from "./pages/History"
 
-ReactDOM.render(
+const routing = (
   <Router>
   <div>
             <Switch>
@@ -16,6 +16,7 @@ ReactDOM.render(
             <Route component={Error}/>
            </Switch>
         </div> 
-  </Router>,
-  document.getElementById("root")
+  </Router>
 );
+
+ReactDOM.render(routing, document.getElementById("root"));
