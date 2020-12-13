@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Button } from "@material-ui/core";
 import { Head } from "../components";
 import { ThemeProvider } from "@material-ui/styles";
 import MaterialUI from "../components/layout/Material";
@@ -30,10 +30,10 @@ export default function Login() {
   //   window.location.reload();
   // }
 
-  const onSuccess = (response) => {
-    response.json().then((body) => {
-      alert(JSON.stringify(body));
-    });
+  const onSuccess = () => {
+    // response.json().then((body) => {
+    //   alert(JSON.stringify(body));
+    // });
     localStorage.setItem("loggedin", "true");
     window.location.reload();
   };
@@ -52,7 +52,7 @@ export default function Login() {
             <Typography variant="h4" component="h2" gutterBottom>
               Login
             </Typography>
-            <TwitterLogin
+            {/* <TwitterLogin
               loginUrl="http://localhost:4000/api/v1/auth/twitter" //need to change
               onFailure={onFailed}
               onSuccess={onSuccess}
@@ -60,10 +60,10 @@ export default function Login() {
               showIcon={true}
               customHeaders={customHeader}
               forceLogin={true}
-            />
-            {/* <Button onClick = {()=> onLogin()}>
+            /> */}
+            <Button onClick = {()=> onSuccess()}>
               Sign in Here
-            </Button> */}
+            </Button>
             {showalert && (
               <Alert severity="error" style={{ marginTop: "1rem" }}>
                 {errormsg}

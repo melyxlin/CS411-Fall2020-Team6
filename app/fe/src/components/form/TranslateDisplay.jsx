@@ -35,7 +35,7 @@ export default function TranslateDisplay(props) {
           multiline
           fullWidth
           variant="outlined"
-          value={responseVisable ? response : ""}
+          value={responseVisable ? response[0] : ""}
           rows={10}
           InputProps={{
             readOnly: true,
@@ -43,6 +43,7 @@ export default function TranslateDisplay(props) {
           }}
           style={{ marginBottom: "1rem" }}
         />
+        {responseVisable && (<img src={response[1]} alt="gif" />)}
       </Box>
       {responseVisable && (
         <Grid container direction="row" justify="flex-end" alignItems="center">
@@ -85,6 +86,6 @@ export default function TranslateDisplay(props) {
 }
 
 TranslateDisplay.propTypes = {
-  response: PropTypes.string,
+  response: PropTypes.array,
   responseVisable: PropTypes.bool,
 };
