@@ -30,8 +30,6 @@ export default function TranslateDisplay(props) {
     <div>
       <Box className="form-box">
         <TextField
-          // props to identify component in test suite.
-          // inputProps={{ "data-testid": "token-field" }}
           multiline
           fullWidth
           variant="outlined"

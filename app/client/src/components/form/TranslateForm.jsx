@@ -18,9 +18,12 @@ import PropTypes from "prop-types";
 import { getGif, getTranslation, getLanguages } from "../../utils/apiRoutes";
 
 export default function TranslateForm(props) {
+   // maximum number of characters that can be tweeted
   const MAX_CHARACTER = 280;
+
   const [languages, setLanguages] = useState([]);
 
+  //function to populate list of languages translate to
   const getLanguagesList = async () => {
     const languagesList = await getLanguages();
     setLanguages(languagesList.data);
@@ -30,6 +33,7 @@ export default function TranslateForm(props) {
     getLanguagesList();
   }, []);
 
+  //function to translation and gif from
   const submitForm = async (values) => {
     const transResponse = await getTranslation(
       values.message.replace(/\s/g, "%20"),
@@ -40,6 +44,7 @@ export default function TranslateForm(props) {
     sendResponse(respArray);
   };
 
+  // function to display translation and gid
   const sendResponse = (response) => {
     props.parentCallback(response);
   };
@@ -48,7 +53,7 @@ export default function TranslateForm(props) {
     <Formik
       initialValues={{ message: "", lang: "" }}
       onSubmit={(values) => submitForm(values)}
-      // Schema that prevents user from submitting if a token is not inputted.
+      // Schema that prevents user from submitting if message and languages is not inputted.
       validationSchema={object({
         message: string().required("Must have a message"),
         lang: string().required("Must select language"),
@@ -60,7 +65,6 @@ export default function TranslateForm(props) {
         touched,
         isSubmitting,
         values,
-        setFieldValue,
       }) => (
         <div>
           <div>
@@ -96,12 +100,9 @@ export default function TranslateForm(props) {
               </FormControl>
             </Grid>
             <div>
-              {/* Input box where users will input the token to be used. */}
               <Form>
                 <Box className="form-box">
                   <TextField
-                    // props to identify component in test suite.
-                    // inputProps={{ "data-testid": "token-field" }}
                     multiline
                     fullWidth
                     variant="outlined"
