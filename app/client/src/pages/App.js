@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MaterialUI from "../components/layout/Material";
 import { Grid } from "@material-ui/core";
 import { TranslateForm, TranslateDisplay, Head } from "../components";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { blue } from "@material-ui/core/colors";
+import {getUserData} from "../utils/apiRoutes"
 
 export default function App() {
   const [response, setResponse] = useState([]);
@@ -14,6 +15,19 @@ export default function App() {
     setResponse(childData);
     setResponseVisable(true);
   };
+
+  const getUser = async () => {
+    var url = window.location.href;
+    var oauth_token = url.match(/oauth_token=(.*)&oauth_verifier/)[1];
+    var oauth_verifier = url.match(/&oauth_verifier=(.*)/)[1]
+    
+    // const user = await getUserData(oauth_token,oauth_verifier);
+    // console.log(user);
+  };
+
+  useEffect(() => {
+    getUser()
+  });
 
   const theme = responsiveFontSizes(
     createMuiTheme({

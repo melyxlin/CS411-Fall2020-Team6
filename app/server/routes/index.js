@@ -3,7 +3,15 @@ var router = express.Router();
 var request = require('request');
 const {MongoClient} = require('mongodb');
 const {Translate} = require('@google-cloud/translate').v2;
+var Twitter = require("node-twitter-api");
 require('dotenv').config();
+
+const twitter = new Twitter({
+  consumerKey: "FquLfyd4pjxX2AORdCIgtQ39j",
+  consumerSecret: "g81pBhp5aX9jBjxl2EROGScjFwQUsKDGjhSjozXkjzTeVebDMO",
+  callback: "http://localhost:3000",
+});
+
 
 //Setup Google Translate Client
 const CREDENTIALS = JSON.parse(process.env.GOOGLE_TRANSLATE_CREDENTIALS);
@@ -23,6 +31,8 @@ async function translateText(text, targetLanguage){
     let [response] = await translate.translate(text, targetLanguage);
     return response;
 }
+
+var _requestSecret;
 
 MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true })
 .then(client => {
@@ -75,6 +85,42 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
       }
     })
   })
+
+  router.get("/logout", (req, res) => {
+    req.logout();
+    res.cookie('loggedin', 'false')
+    res.redirect("http://localhost:3000/");
+  });
+
+  router.get("/login", function(req, res) {
+    twitter.getRequestToken(function(err, requestToken, requestSecret) {
+        if (err)
+            res.status(500).send(err);
+        else {
+            _requestSecret = requestSecret;
+            res.cookie('loggedin', 'true')
+            res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token=" + requestToken);
+        }
+    });
+});
+
+// router.get("/access-token/:oauth_token/:oauth_verifier", function(req, res) {
+//   var requestToken = req.params.oauth_token,
+//   verifier = req.params.oauth_verifier;
+
+//   twitter.getAccessToken("eRl-QAAAAAABKAWKAAABdmBCiZ", _requestSecret, "unXidHAavXBz5CMKRZXC4WCoCghGvc1S", function(err, accessToken, accessSecret) {
+//       if (err)
+//           res.status(500).send(err);
+//       else
+//           twitter.verifyCredentials(accessToken, accessSecret, function(err, user) {
+//               if (err)
+//                   res.status(500).send(err);
+//               else
+//               console.log(user);
+//                   res.send(user);
+//           });
+//   });
+// });
   
 })
 .catch(error => console.error(error))

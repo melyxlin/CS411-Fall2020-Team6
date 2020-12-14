@@ -24,8 +24,7 @@ export default function Head(props) {
   const auth = props.auth;
 
   const logout = () => {
-    localStorage.setItem("loggedin", "false");
-    window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:4000/logout";
   };
 
   return (

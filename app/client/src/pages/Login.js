@@ -5,11 +5,10 @@ import { ThemeProvider } from "@material-ui/styles";
 import MaterialUI from "../components/layout/Material";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { blue } from "@material-ui/core/colors";
-import TwitterLogin from "react-twitter-auth";
 import Alert from "@material-ui/lab/Alert";
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 export default function Login() {
-  const customHeader = {};
   const [showalert, setShowAlert] = React.useState(false);
   const [errormsg, setErrorMsg] = React.useState("");
 
@@ -25,22 +24,8 @@ export default function Login() {
     })
   );
 
-  // const onLogin = () =>{
-  //   localStorage.setItem('loggedin', 'true');
-  //   window.location.reload();
-  // }
-
   const onSuccess = () => {
-    // response.json().then((body) => {
-    //   alert(JSON.stringify(body));
-    // });
-    localStorage.setItem("loggedin", "true");
-    window.location.reload();
-  };
-
-  const onFailed = (error) => {
-    setShowAlert(true);
-    setErrorMsg(error.message);
+    window.location.href = "http://localhost:4000/login";
   };
 
   return (
@@ -52,16 +37,7 @@ export default function Login() {
             <Typography variant="h4" component="h2" gutterBottom>
               Login
             </Typography>
-            {/* <TwitterLogin
-              loginUrl="http://localhost:4000/api/v1/auth/twitter" //need to change
-              onFailure={onFailed}
-              onSuccess={onSuccess}
-              requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse" //need to change
-              showIcon={true}
-              customHeaders={customHeader}
-              forceLogin={true}
-            /> */}
-            <Button onClick = {()=> onSuccess()}>
+            <Button variant="contained" color="primary"  startIcon={<TwitterIcon />} onClick = {()=> onSuccess()}>
               Sign in Here
             </Button>
             {showalert && (

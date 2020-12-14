@@ -26,3 +26,11 @@ export const getGif = (msg) => {
       error,
     }));
   };
+
+  export const getUserData = (oauth_token, oauth_verifier) => {
+    const getUserDataFail = "GET_USER_DATA_FAIL";
+    return axios.get(BASE_URL+"/access-token" + "/" + oauth_token + "/" + oauth_verifier).catch((error) => ({
+      type: getUserDataFail,
+      error,
+    }));
+  };

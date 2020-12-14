@@ -65,6 +65,7 @@ export default function TranslateForm(props) {
         touched,
         isSubmitting,
         values,
+        setFieldValue,
       }) => (
         <div>
           <div>
