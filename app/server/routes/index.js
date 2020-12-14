@@ -80,8 +80,10 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
   //Fetch gif from GIPHY
   router.get('/getGif/:search_term', (req, res) => {
     request("http://api.giphy.com/v1/gifs/translate?s=" + req.params.search_term.replace("%20","+") +"&api_key="+process.env.GIPHY_API_KEY+ "&limit=1", function (error, response, body) {
-      if (!error && response.statusCode == 200) {
+      if (!error && response.statusCode == 200 && JSON.parse(body).data.length != 0) {
         res.send(JSON.parse(body).data.images.downsized.url);
+      } else {
+        res.sendStatus(404)
       }
     })
   })
