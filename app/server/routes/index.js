@@ -152,25 +152,6 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
         }
     });
 });
-
-// router.get("/access-token/:oauth_token/:oauth_verifier", function(req, res) {
-//   var requestToken = req.params.oauth_token,
-//   verifier = req.params.oauth_verifier;
-
-//   twitter.getAccessToken("eRl-QAAAAAABKAWKAAABdmBCiZ", _requestSecret, "unXidHAavXBz5CMKRZXC4WCoCghGvc1S", function(err, accessToken, accessSecret) {
-//       if (err)
-//           res.status(500).send(err);
-//       else
-//           twitter.verifyCredentials(accessToken, accessSecret, function(err, user) {
-//               if (err)
-//                   res.status(500).send(err);
-//               else
-//               console.log(user);
-//                   res.send(user);
-//           });
-//   });
-// });
-  
 })
 .catch(error => console.error(error))
 
