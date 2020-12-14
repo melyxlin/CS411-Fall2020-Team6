@@ -20,9 +20,9 @@ export default function TranslateDisplay(props) {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handlePostTweet = () => {
     setOpen(true);
-    postTweet("pizza");
+    postTweet(response[0], {gifUrl:response[2]});
   };
 
   const handleClose = () => {
@@ -38,10 +38,6 @@ export default function TranslateDisplay(props) {
           variant="outlined"
           value={responseVisable ? response[0] : ""}
           rows={10}
-          InputProps={{
-            readOnly: true,
-            "data-testid": "display-field",
-          }}
           style={{ marginBottom: "1rem" }}
         />
         {responseVisable && (<img src={response[1]} alt="gif" />)}
@@ -55,7 +51,7 @@ export default function TranslateDisplay(props) {
             className="button-info"
             variant="contained"
             color="primary"
-            onClick={handleClickOpen}
+            onClick={handlePostTweet}
           >
             Tweet
           </Button>

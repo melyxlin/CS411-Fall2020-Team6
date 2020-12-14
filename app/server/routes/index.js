@@ -52,23 +52,25 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
     params = req.originalUrl.split("/");
     twitter.getAccessToken(params[2], params[3], params[4], function(error, accessToken, accessTokenSecret, results) {
       if (error) {
+        console.log("access token error");
         console.log(error);
       } else {
         twitter.verifyCredentials(accessToken, accessTokenSecret, params, function(error, data, response) {
           if (error) {
-            console.log(error);
           } else {
             res.cookie("name", data["name"])
             res.cookie("id", data["id"])
-            twitter.statuses("update", {status: "Hello world!"}, accessToken, accessTokenSecret, function(error, data, response) {
+            twitter.statuses("update", {status: req.params.txt + " " + req.body.gifUrl}, accessToken, accessTokenSecret, function(error, data, response) {
               if (error) {
                 console.log(error);
               } else {
                   // Insert to DB
-                  db.insertOne(params[5]).then(results => {
-                    console.log(results)
-                    res.send(200)
-                  }) .catch (error => console.log(error))
+                  // db.insertOne(params[5]).then(results => {
+                  //   console.log(results)
+                  //   res.send(200)
+                  // }) .catch (error => console.log(error))
+                  console.log("ok!")
+                  res.send(200);
               }
           }
       );
@@ -104,7 +106,7 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
   router.get('/getGif/:search_term', (req, res) => {
     request("http://api.giphy.com/v1/gifs/translate?s=" + req.params.search_term.replace("%20","+") +"&api_key="+process.env.GIPHY_API_KEY+ "&limit=1", function (error, response, body) {
       if (!error && response.statusCode == 200 && JSON.parse(body).data.length != 0) {
-        res.send(JSON.parse(body).data.images.downsized.url);
+        res.json({downsized:JSON.parse(body).data.images.downsized.url, bitly:JSON.parse(body).data.bitly_url});
       } else {
         res.sendStatus(404)
       }

@@ -18,8 +18,8 @@ import PropTypes from "prop-types";
 import { getGif, getTranslation, getLanguages } from "../../utils/apiRoutes";
 
 export default function TranslateForm(props) {
-   // maximum number of characters that can be tweeted
-  const MAX_CHARACTER = 280;
+   // maximum number of characters that can be tweeted (shorted to make room for gif)
+  const MAX_CHARACTER = 250; 
 
   const [languages, setLanguages] = useState([]);
 
@@ -40,7 +40,7 @@ export default function TranslateForm(props) {
       values.lang
     );
     const gifResponse = await getGif(values.message.replace(/\s/g, "%20"));
-    const respArray = [transResponse.data, gifResponse.data];
+    const respArray = [transResponse.data, gifResponse.data.downsized, gifResponse.data.bitly];
     sendResponse(respArray);
   };
 
@@ -111,7 +111,7 @@ export default function TranslateForm(props) {
                     name="message"
                     rows={10}
                     inputProps={{
-                      maxLength: 280,
+                      maxLength: 250,
                       "data-testid": "message-field",
                     }}
                     onChange={handleChange}

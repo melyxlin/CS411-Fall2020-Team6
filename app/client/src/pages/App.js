@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import MaterialUI from "../components/layout/Material";
 import { Grid } from "@material-ui/core";
 import { TranslateForm, TranslateDisplay, Head } from "../components";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { blue } from "@material-ui/core/colors";
-import {getUserData} from "../utils/apiRoutes"
 
 export default function App() {
   const [response, setResponse] = useState([]);

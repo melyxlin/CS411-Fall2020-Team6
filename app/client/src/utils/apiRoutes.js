@@ -42,10 +42,10 @@ export const getGif = (msg) => {
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
-  export const postTweet = (text) => {
+  export const postTweet = (text, gifUrl) => {
     const postTweetFail = "POST_TWEET_FAIL";
     return axios.post(BASE_URL+"/writeTweet" + "/" + getCookie("reqToken") + "/"
-    + getCookie("reqSecret") + "/" + getCookie("oauth_verifier") + "/" + text).catch((error) => ({
+    + getCookie("reqSecret") + "/" + getCookie("oauth_verifier") + "/" + text, gifUrl).catch((error) => ({
       type: postTweetFail,
       error,
     }));
