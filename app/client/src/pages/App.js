@@ -22,17 +22,6 @@ export default function App() {
       document.cookie = ("oauth_verifier=" + url.match(/&oauth_verifier=(.*)/)[1]);
   }
 
-  const getUser = async () => {
-    // var oauth_token = url.match(/oauth_token=(.*)&oauth_verifier/)[1];
-    // var oauth_verifier = url.match(/&oauth_verifier=(.*)/)[1]
-    // const user = await getUserData(oauth_token,oauth_verifier);
-    // console.log(user);
-  };
-
-  useEffect(() => {
-    getUser()
-  });
-
   const theme = responsiveFontSizes(
     createMuiTheme({
       palette: {
