@@ -58,7 +58,7 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
   
   //Translate text to target lang
   router.get('/translate/:txt/:lang', (req, res) => {
-    translateText(req.params.txt, req.params.lang)
+    translateText(req.params.txt.replace("%20", " "), req.params.lang)
     .then((response)=> {
       res.send(response);
     })
@@ -69,9 +69,9 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
   
   //Fetch gif from GIPHY
   router.get('/getGif/:search_term', (req, res) => {
-    request("http://api.giphy.com/v1/gifs/translate?s=" + req.params.search_term +"&api_key="+process.env.GIPHY_API_KEY+ "&limit=1", function (error, response, body) {
+    request("http://api.giphy.com/v1/gifs/translate?s=" + req.params.search_term.replace("%20","+") +"&api_key="+process.env.GIPHY_API_KEY+ "&limit=1", function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        res.send(JSON.parse(body).data.images.original.url);
+        res.send(JSON.parse(body).data.images.downsized.url);
       }
     })
   })
