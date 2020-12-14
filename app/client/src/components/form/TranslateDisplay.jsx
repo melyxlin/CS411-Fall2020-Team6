@@ -11,6 +11,8 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { postTweet } from "../../utils/apiRoutes";
+
 
 export default function TranslateDisplay(props) {
   const response = props.response;
@@ -20,6 +22,7 @@ export default function TranslateDisplay(props) {
 
   const handleClickOpen = () => {
     setOpen(true);
+    postTweet("pizza");
   };
 
   const handleClose = () => {

@@ -7,8 +7,8 @@ var Twitter = require("node-twitter-api");
 require('dotenv').config();
 
 const twitter = new Twitter({
-  consumerKey: "FquLfyd4pjxX2AORdCIgtQ39j",
-  consumerSecret: "g81pBhp5aX9jBjxl2EROGScjFwQUsKDGjhSjozXkjzTeVebDMO",
+  consumerKey: process.env.TWITTER_API_KEY,
+  consumerSecret: process.env.TWITTER_API_SECRET,
   callback: "http://localhost:3000",
 });
 
@@ -41,18 +41,41 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
 
   //Read DB
   router.get('/getTweets/:userId', (req, res) => {
-    db.find().toArray().then(results => {
+    db.find({user_id: req.params.userId}).toArray().then(results => {
       res.send(results)
     }) .catch (error => console.log(error))
   })
 
   //Post to DB & Twitter
-  router.post('/writeTweet/:txt', (req, res) => {
-    //Tweet code
-    db.insertOne(newItem).then(results => {
-      console.log(results)
-      res.send(200)
-    }) .catch (error => console.log(error))
+  router.post('/writeTweet/:reqToken/:reqTokenSecret/:oauth_verifier/:txt', (req, res) => {
+    //Tweet 
+    params = req.originalUrl.split("/");
+    twitter.getAccessToken(params[2], params[3], params[4], function(error, accessToken, accessTokenSecret, results) {
+      if (error) {
+        console.log(error);
+      } else {
+        twitter.verifyCredentials(accessToken, accessTokenSecret, params, function(error, data, response) {
+          if (error) {
+            console.log(error);
+          } else {
+            res.cookie("name", data["name"])
+            res.cookie("id", data["id"])
+            twitter.statuses("update", {status: "Hello world!"}, accessToken, accessTokenSecret, function(error, data, response) {
+              if (error) {
+                console.log(error);
+              } else {
+                  // Insert to DB
+                  db.insertOne(params[5]).then(results => {
+                    console.log(results)
+                    res.send(200)
+                  }) .catch (error => console.log(error))
+              }
+          }
+      );
+          }
+      });
+      }
+  });
   })
   
   //Fetch languages and codes supported by Google Translate
@@ -89,7 +112,6 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
   })
 
   router.get("/logout", (req, res) => {
-    req.logout();
     res.cookie('loggedin', 'false')
     res.redirect("http://localhost:3000/");
   });
@@ -101,6 +123,8 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
         else {
             _requestSecret = requestSecret;
             res.cookie('loggedin', 'true')
+            res.cookie('reqToken', requestToken)
+            res.cookie('reqSecret', requestSecret)
             res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token=" + requestToken);
         }
     });

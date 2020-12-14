@@ -16,11 +16,15 @@ export default function App() {
     setResponseVisable(true);
   };
 
+  if (!document.cookie.includes("oauth_token")) {
+      var url = window.location.href;
+      document.cookie = ("oauth_token=" + url.match(/oauth_token=(.*)&oauth_verifier/)[1]);
+      document.cookie = ("oauth_verifier=" + url.match(/&oauth_verifier=(.*)/)[1]);
+  }
+
   const getUser = async () => {
-    var url = window.location.href;
-    var oauth_token = url.match(/oauth_token=(.*)&oauth_verifier/)[1];
-    var oauth_verifier = url.match(/&oauth_verifier=(.*)/)[1]
-    
+    // var oauth_token = url.match(/oauth_token=(.*)&oauth_verifier/)[1];
+    // var oauth_verifier = url.match(/&oauth_verifier=(.*)/)[1]
     // const user = await getUserData(oauth_token,oauth_verifier);
     // console.log(user);
   };
