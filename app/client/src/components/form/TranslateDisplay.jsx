@@ -25,6 +25,10 @@ export default function TranslateDisplay(props) {
     postTweet(response[0], {gifUrl:response[2]});
   };
 
+  const handleOpen = () => {
+    window.open("https://twitter.com/","_blank")
+  }
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -68,7 +72,7 @@ export default function TranslateDisplay(props) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} color="primary">
+              <Button onClick={handleOpen} color="primary">
                 View Tweet
               </Button>
               <Button onClick={handleClose} color="primary" autoFocus>
