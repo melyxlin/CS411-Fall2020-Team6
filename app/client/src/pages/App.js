@@ -7,7 +7,7 @@ import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { blue } from "@material-ui/core/colors";
 
 export default function App() {
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState([]);
   const [responseVisable, setResponseVisable] = useState(false);
 
   const callBackResponse = (childData) => {

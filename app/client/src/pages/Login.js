@@ -5,7 +5,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import MaterialUI from "../components/layout/Material";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { blue } from "@material-ui/core/colors";
-import TwitterLogin from "react-twitter-auth/lib/react-twitter-auth-component.js";
+import TwitterLogin from "react-twitter-auth";
 import Alert from "@material-ui/lab/Alert";
 
 export default function Login() {
