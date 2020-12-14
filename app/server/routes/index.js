@@ -69,7 +69,6 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
                   //   console.log(results)
                   //   res.send(200)
                   // }) .catch (error => console.log(error))
-                  console.log("ok!")
                   res.send(200);
               }
           }
