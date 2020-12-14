@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
+import Cookies from 'js-cookie';
 import { postTweet } from "../../utils/apiRoutes";
 
 
@@ -20,9 +21,11 @@ export default function TranslateDisplay(props) {
 
   const [open, setOpen] = React.useState(false);
 
-  const handlePostTweet = () => {
+  const handlePostTweet = async () => {
     setOpen(true);
-    postTweet(response[0], {gifUrl:response[2]});
+    const tweetID =  await postTweet(response[0], {gifUrl:response[2], embededUrl:response[1]});
+    console.log(tweetID);
+    Cookies.set('id', tweetID);
   };
 
   const handleOpen = () => {

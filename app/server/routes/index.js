@@ -80,11 +80,14 @@ MongoClient.connect(process.env.MONGO_CONNECTION_URI, { useUnifiedTopology: true
               if (error) {
                 console.log(error);
               } else {
+                // console.log("ok");
+                var id = data.user["id"];
+                res.cookie("id", id)
                   // Insert to DB
                   var doc = {
                     user_id: id,
                     text: params[5],
-                    gifURI: req.body.gifUrl
+                    gifURI: req.body.embededUrl
                   }
                   db.insertOne(doc).then(results => {
                     res.sendStatus(200)

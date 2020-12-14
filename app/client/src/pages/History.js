@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   Grid,
   Typography,
@@ -21,6 +21,7 @@ import { blue } from "@material-ui/core/colors";
 import { getTweets } from "../utils/apiRoutes";
 
 export default function History() {
+  const [tweets, setTweets] = useState([]);
   const theme = responsiveFontSizes(
     createMuiTheme({
       palette: {
@@ -33,7 +34,17 @@ export default function History() {
     })
   );
 
-  const userTweets = getTweets()
+  const userTweets = async () => {
+    const tweetsArray = await getTweets();
+    setTweets(tweetsArray.data);
+    
+  }
+
+  useEffect(() => {
+    userTweets();
+  });
+
+
 
   const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -63,12 +74,12 @@ export default function History() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {top100Films.map((tweet) => (
+                  {tweets.map((tweet) => (
                     <TableRow key={tweet.text}>
                       <TableCell component="th" scope="row">
                         {tweet.text}
                       </TableCell>
-                      <TableCell align="right">{tweet.gifURI}</TableCell>
+                      <TableCell align="right"><img src={tweet.gifURI}/></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -80,18 +91,3 @@ export default function History() {
     </ThemeProvider>
   );
 }
-
-const top100Films = [
-  {
-    _id: 5fd7cc4d254e694f49c08adb,
-    user_id: 1338020900868780000,
-    text: 'pizza',
-    gifURI: 'https://gph.is/1uJ3RE4'
-  },
-  {
-    _id: 5fd7ccbba3158052ff294974,
-    user_id: 1338020900868780000,
-    text: 'cake',
-    gifURI: 'https://gph.is/2wl7AwY'
-  }
-];
