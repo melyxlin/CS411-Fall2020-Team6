@@ -1,7 +1,13 @@
 # CS411-Fall2020-Team6
 Repository for Boston University CS411 Fall 2020 Group 6
-</br>
-Group Members: Melissa Lin, Terrence Lin, Jachen Liu, Richard Li, Anthony Lam, and Sergey Lebedev
+
+### Team Members
+* Melissa Lin
+* Terrence Lin
+* Jachen Liu
+* Richard Li
+* Anthony Lam
+* Sergey Lebedev
 
 ### TransTweeter
 A webapp that will translate a user's message, and post that translation on to their twitter account along with a gif that represents their message. 
