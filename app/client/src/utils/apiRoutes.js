@@ -2,6 +2,8 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:4000";
 
+ // function to call endpoint to get gid
+
 export const getGif = (msg) => {
     const getGifFail = "GET_GIF_FAIL";
     return axios.get(BASE_URL+"/getGif/"+msg).catch((error) => ({
@@ -9,7 +11,8 @@ export const getGif = (msg) => {
       error,
     }));
   };
-
+  
+  // function to call endpoint to get translated message
   export const getTranslation = (msg, lang) => {
     const getTranslateFail = "GET_TRANSLATE_FAIL";
     return axios.get(BASE_URL+"/translate/"+msg+"/"+lang).catch((error) => ({
@@ -19,6 +22,7 @@ export const getGif = (msg) => {
   };
 
 
+  // function to call endpoint to get all the languages that webapp supports
   export const getLanguages = () => {
     const getTranslateFail = "GET_LANGUAGES_FAIL";
     return axios.get(BASE_URL+"/getLanguages").catch((error) => ({
@@ -27,13 +31,6 @@ export const getGif = (msg) => {
     }));
   };
 
-  export const getUserData = (oauth_token, oauth_verifier) => {
-    const getUserDataFail = "GET_USER_DATA_FAIL";
-    return axios.get(BASE_URL+"/access-token" + "/" + oauth_token + "/" + oauth_verifier).catch((error) => ({
-      type: getUserDataFail,
-      error,
-    }));
-  };
 
    //Helper for cookies
    function getCookie(name) {
@@ -42,6 +39,7 @@ export const getGif = (msg) => {
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
+  // function to call endpoint to get tweets
   export const getTweets = (id) => {
     const getTweetsFail = "GET_TWEETS_FAIL";
     return axios.get(BASE_URL+"/getTweets" + "/" + getCookie("reqToken") + "/"
@@ -50,7 +48,8 @@ export const getGif = (msg) => {
       error,
     }));
   };
- 
+
+  //function to call end point to post tweets
   export const postTweet = (text, gifUrl) => {
     const postTweetFail = "POST_TWEET_FAIL";
     return axios.post(BASE_URL+"/writeTweet" + "/" + getCookie("reqToken") + "/"

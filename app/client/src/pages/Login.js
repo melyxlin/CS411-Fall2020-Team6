@@ -21,7 +21,8 @@ export default function Login() {
     })
   );
 
-  const onSuccess = () => {
+  // route for user login
+  const onLogin = () => {
     window.location.href = "http://localhost:4000/login";
   };
 
@@ -34,7 +35,7 @@ export default function Login() {
             <Typography variant="h4" component="h2" gutterBottom>
               Login
             </Typography>
-            <Button variant="contained" color="primary"  startIcon={<TwitterIcon />} onClick = {()=> onSuccess()}>
+            <Button variant="contained" color="primary"  startIcon={<TwitterIcon />} onClick = {()=> onLogin()}>
               Sign in Here
             </Button>
           </MaterialUI>

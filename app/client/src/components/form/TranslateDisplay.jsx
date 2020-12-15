@@ -21,6 +21,7 @@ export default function TranslateDisplay(props) {
 
   const [open, setOpen] = React.useState(false);
 
+  // posting tweet on to twitter account
   const handlePostTweet = async () => {
     setOpen(true);
     const tweetID =  await postTweet(response[0], {gifUrl:response[2], embededUrl:response[1]});
@@ -28,6 +29,7 @@ export default function TranslateDisplay(props) {
     Cookies.set('id', tweetID);
   };
 
+  //opening twitter.com to see tweet
   const handleOpen = () => {
     window.open("https://twitter.com/","_blank")
   }
@@ -52,9 +54,6 @@ export default function TranslateDisplay(props) {
       {responseVisable && (
         <Grid container direction="row" justify="flex-end" alignItems="center">
           <Button
-            inputProps={{
-              "data-testid": "translate-button",
-            }}
             className="button-info"
             variant="contained"
             color="primary"

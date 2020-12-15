@@ -44,7 +44,7 @@ export default function TranslateForm(props) {
     sendResponse(respArray);
   };
 
-  // function to display translation and gid
+  // function to display translation and gif
   const sendResponse = (response) => {
     props.parentCallback(response);
   };
@@ -83,8 +83,6 @@ export default function TranslateForm(props) {
               >
                 <InputLabel>Language</InputLabel>
                 <Field
-                  // props to identify component in test suite.
-                  inputProps={{ "data-testid": "language-field" }}
                   name="lang"
                   input={<OutlinedInput label="Language"></OutlinedInput>}
                   display="flex"
@@ -110,10 +108,6 @@ export default function TranslateForm(props) {
                     label="Message"
                     name="message"
                     rows={10}
-                    inputProps={{
-                      maxLength: 250,
-                      "data-testid": "message-field",
-                    }}
                     onChange={handleChange}
                     error={errors.message && touched.message}
                     helperText={

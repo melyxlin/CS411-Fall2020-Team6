@@ -10,6 +10,7 @@ export default function App() {
   const [response, setResponse] = useState([]);
   const [responseVisable, setResponseVisable] = useState(false);
 
+  // sending translated tweet to be displayed
   const callBackResponse = (childData) => {
     setResponse(childData);
     setResponseVisable(true);

@@ -34,6 +34,7 @@ export default function History() {
     })
   );
 
+  // getting back all user tweets from database
   const userTweets = async () => {
     const tweetsArray = await getTweets();
     setTweets(tweetsArray.data);
